@@ -66,3 +66,4 @@ New capability: `workflows/<name>.py` + `tests/test_<name>.py` + registry entry.
 - [Jira status mapping](docs/demo/jira_status_mapping.md)
 
 Live ticket: **ACME-2** — add `preview_watermark` (not on `main` until the live first-change).
+<!-- cloud-agent wiring check -->

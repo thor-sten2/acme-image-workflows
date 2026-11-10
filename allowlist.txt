@@ -1,0 +1,14 @@
+# Paths agents and CI may modify for demo PRs.
+# Fail-closed: anything outside these prefixes is rejected by ci_mock / boundary-guard.
+src/acme_image_workflows/
+tests/
+docs/demo/
+README.md
+pyproject.toml
+Makefile
+allowlist.txt
+scripts/ci_mock.sh
+scripts/deploy_mock.sh
+.cursor/rules/
+.cursor/skills/
+.gitignore

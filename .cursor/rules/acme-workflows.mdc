@@ -1,0 +1,32 @@
+---
+description: Acme image workflows conventions — always apply for this repo
+globs:
+  - "src/acme_image_workflows/**"
+  - "tests/**"
+  - "scripts/**"
+  - "docs/demo/**"
+alwaysApply: true
+---
+
+# Acme Image Workflows
+
+This repo is an **Acme wrapper** over HuggingFace Diffusers. The sibling `diffusers/` tree (if present) is **read-only context** — never edit it in demo PRs.
+
+## Boundaries
+
+- Edit only under `src/acme_image_workflows/` and matching `tests/`. Docs/scripts/rules are allowed when the task requires them.
+- Public Diffusers APIs only via `client.py`. Do not import private/`_` Diffusers symbols. Do not call Diffusers directly from `workflows/`.
+- Unit tests stub `DiffusersClient` — no network, no GPU, no model download.
+
+## New capability pattern
+
+1. Add `src/acme_image_workflows/workflows/<name>.py`
+2. Add `tests/test_<name>.py`
+3. Register via `register_workflow("<name>", fn)` in the workflow module
+4. Autoload from `registry._autoload()` if needed
+
+## Ship path
+
+1. `/self-check` then `/boundary-guard`
+2. `make test` / `make ci_mock` must pass
+3. Human approval (`make approve_deploy TICKET=ACME-N`) before `make deploy_mock TICKET=ACME-N`
